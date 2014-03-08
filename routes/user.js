@@ -77,15 +77,15 @@ exports.create = function(db){
 		for (key in userData){
 			switch (key){
 				case "birthDate":
-					if(newUser[key].length > 0){
+					if(userData[key].length > 0){
 						newUser[key] = userData[key];
 					}
 				case "isStocker":
-					if(newUser[key].length > 0){
+					if(userData[key].length > 0){
 						newUser[key] = userData[key];
 					}
 				case "isActive":
-					if(newUser[key].length > 0){
+					if(userData[key].length > 0){
 						newUser[key] = userData[key];
 					}
 				default:
@@ -112,3 +112,58 @@ exports.create = function(db){
 		});
 	}
 };
+
+/*
+ * PUT updated user data
+ */
+exports.edit = function(db){
+	return function(req, res){
+
+		var data = {
+			isSuccessful: 0,
+			alertLevel: null,
+			alertMessages: [],
+			user : null
+		}
+
+		var userData = req.body;
+		var updatedUser = {};
+
+		for (key in userData){
+			switch (key){
+				case "birthDate":
+					if(userData[key].length > 0){
+						updatedUser[key] = userData[key];
+					}
+				case "isStocker":
+					if(userData[key].length > 0){
+						updatedUser[key] = userData[key];
+					}
+				case "isActive":
+					if(userData[key].length > 0){
+						updatedUser[key] = userData[key];
+					}
+				default:
+					if(userData[key].length > 0){
+						updatedUser[key] = userData[key];
+					} else {
+						data.isSuccessful = 0;
+						data.alertLevel = "dataError";
+						data.alertMessages.push(key + " is required");
+					}
+			}
+		}
+
+		db.collection('users').update({"_id": new ObjectID(req.params.id)}, { $set: updatedUser }, function(err, item){
+			if(err){
+				data.isSuccessful = 0;
+				data.alertLevel = err;
+				data.alertMessages = err;
+			}
+			data.isSuccessful = 1;
+			data.user = item;
+
+			res.json(data);
+		});
+	}
+}
