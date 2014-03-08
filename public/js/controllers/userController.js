@@ -1,6 +1,6 @@
-vinventory.controller("listUsers", function($scope, $rootScope, globalData, globalFunctions){
+vinventory.controller("users", function($scope, $rootScope, globalData, globalFunctions, userService){
 	
-	// userService.listUsers();
-	// $scope.products = globalData.users;
+	userService.users();
+	$scope.users = globalData.users;
 	
 });
