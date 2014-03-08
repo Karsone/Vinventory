@@ -4,13 +4,13 @@ var vinventory = angular.module('vinventory', ['ngTouch','ngRoute']);
 vinventory.factory("globalData", function(){
 
 	var 
-	customers = {},
-	products = {}
+	users = [],
+	products = []
 
 
 	return{
 		// data:data
-		customers:customers,
+		users:users,
 		products:products
 	}
 
@@ -22,20 +22,14 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 	// var function = function(){
 	// }
 
-	var http = function(url, callback){
+	var http = function(url, data, callback){
 		$http({method: 'GET', url: url, params:data})
 			.then(function(response){
 				//Success
-				var response = angular.fromJson(response.data);
-				if (response.isCallSuccessful == 1) {
-					var method = url.substring(url.length, url.lastIndexOf('.') + 1);
-					console.log(method);
-					if(response[method].isSuccessful == 1){
-						(callback)(response);
-					}else{
-						alert("CALL ERROR");
-					}
 
+				var response = angular.fromJson(response.data);
+				if (response.isSuccessful == 1) {
+					(callback)(response);
 				} else {
 					alert("ERROR");
 				}
