@@ -35,8 +35,9 @@ if ('development' == app.get('env')) {
 app.get('/', function(req, res) {
 	res.sendfile('./public/views/index.htm'); // load the single view file (angular will handle the page changes on the front-end)
 });
-app.get('/users', user.list(db));
-app.get('/user/:id', user.load(db));
+app.get('/users/list', user.list(db));
+app.get('/user/:id/show', user.load(db));
+app.post('/user/create', user.create(db));
 app.get('/categories', category.list(db));
 
 http.createServer(app).listen(app.get('port'), function(){
