@@ -20,7 +20,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
-app.use(express.favicon());
+// app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -46,9 +46,10 @@ app.post('/product/create', product.create(db));
 app.get('/categories', category.list(db));
 
 // User Endpoints
-app.get('/users/list', user.list(db));
-app.get('/user/:id/show', user.load(db));
-app.post('/user/create', user.create(db));
+app.get('/users', user.list(db));
+app.get('/user/:id', user.load(db));
+app.post('/user', user.create(db));
+app.put('/user/:id', user.edit(db));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
