@@ -75,19 +75,21 @@ exports.create = function(db){
 		for (key in userData){
 			switch (key){
 				case "birthDate":
-					if(userData[key].length > 0){
+					if(userData[key]){
 						newUser[key] = userData[key];
 					}
 				case "isStocker":
-					if(userData[key].length > 0){
+					if(userData[key]){
 						newUser[key] = userData[key];
 					}
 				case "isActive":
-					if(userData[key].length > 0){
+					if(userData[key]){
 						newUser[key] = userData[key];
 					}
+				case "_id":
+					break;
 				default:
-					if(userData[key].length > 0){
+					if(userData[key]){
 						newUser[key] = userData[key];
 					} else {
 						data.isSuccessful = 0;
@@ -129,19 +131,21 @@ exports.edit = function(db){
 		for (key in userData){
 			switch (key){
 				case "birthDate":
-					if(userData[key].length > 0){
+					if(userData[key]){
 						updatedUser[key] = userData[key];
 					}
 				case "isStocker":
-					if(userData[key].length > 0){
+					if(userData[key]){
 						updatedUser[key] = userData[key];
 					}
 				case "isActive":
-					if(userData[key].length > 0){
+					if(userData[key]){
 						updatedUser[key] = userData[key];
 					}
+				case "_id":
+					break;
 				default:
-					if(userData[key].length > 0){
+					if(userData[key]){
 						updatedUser[key] = userData[key];
 					} else {
 						data.isSuccessful = 0;
