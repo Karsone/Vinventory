@@ -36,6 +36,7 @@ app.get('/', function(req, res) {
 	res.sendfile('./public/views/index.htm'); // load the single view file (angular will handle the page changes on the front-end)
 });
 app.get('/users', user.list(db));
+app.get('/user/:id', user.load(db));
 app.get('/categories', category.list(db));
 
 http.createServer(app).listen(app.get('port'), function(){
