@@ -3,8 +3,7 @@
 vinventory.factory("userService", function(globalData, globalFunctions){
 
 	var users = function(callback){
-		globalFunctions.http("/users", null ,function(response){
-			console.log(response)
+		globalFunctions.http.get("/users", null ,function(response){
 			angular.copy(response.users, globalData.users);
 			if(callback) (callback)(response);
 		});
