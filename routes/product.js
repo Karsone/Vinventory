@@ -77,27 +77,29 @@ exports.list = function(db){
 		for (key in productData){
 			switch (key){
 				case "unit":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "isAlcoholic":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "count":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "displayOrder":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "abuseMessage":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
+				case "_id":
+					break;
 				default:
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					} else {
 						data.isSuccessful = 0;
@@ -160,8 +162,12 @@ exports.edit = function(db){
 						updatedProduct[key] = productData[key];
 					}
 				case "_id":
+<<<<<<< HEAD
 
 				break;
+=======
+					break;
+>>>>>>> 4318004eabf29bea21d8453d914f8e61f719d085
 				default:
 					if(productData[key]){
 						updatedProduct[key] = productData[key];
@@ -173,10 +179,14 @@ exports.edit = function(db){
 			}
 		}
 
+<<<<<<< HEAD
 		console.log();
 		console.log(updatedProduct);
 
 		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, {safe:true}, function(err, item){
+=======
+		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, { 'safe': true }, function(err, item){
+>>>>>>> 4318004eabf29bea21d8453d914f8e61f719d085
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;

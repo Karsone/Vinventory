@@ -90,8 +90,6 @@ exports.list = function(db){
 					}
 					data.isSuccessful = 1;
 					data.product = item;
-					// data.products = exports.list(db);
-					// res.json(data);
 				});
 			} else {
 				data.isSuccessful = 0;
