@@ -162,12 +162,7 @@ exports.edit = function(db){
 						updatedProduct[key] = productData[key];
 					}
 				case "_id":
-<<<<<<< HEAD
-
-				break;
-=======
 					break;
->>>>>>> 4318004eabf29bea21d8453d914f8e61f719d085
 				default:
 					if(productData[key]){
 						updatedProduct[key] = productData[key];
@@ -179,14 +174,7 @@ exports.edit = function(db){
 			}
 		}
 
-<<<<<<< HEAD
-		console.log();
-		console.log(updatedProduct);
-
-		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, {safe:true}, function(err, item){
-=======
 		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, { 'safe': true }, function(err, item){
->>>>>>> 4318004eabf29bea21d8453d914f8e61f719d085
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;
