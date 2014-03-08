@@ -56,8 +56,6 @@ exports.load = function(db){
  */
 exports.create = function(db){
 	return function(req, res){
-		console.log(req.body);
-
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
@@ -65,7 +63,7 @@ exports.create = function(db){
 			user : null
 		}
 
-		var userData = {"name":"test 123","email":"test@vin65.com","imageURL":"/images/userPhotos/thumbnails/Test.jpg","gender":"other","isStocker":0,"isActive":1}
+		var userData = req.body
 		var newUser = {
 			"name": null,
 			"email": null,
