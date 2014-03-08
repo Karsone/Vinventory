@@ -21,7 +21,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
-app.use(express.favicon());
+// app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -41,7 +41,8 @@ app.get('/', function(req, res) {
 // Product Endpoints
 app.get('/products', product.list(db));
 app.get('/product/:id', product.load(db));
-app.post('/product/create', product.create(db));
+app.post('/product', product.create(db));
+app.put('/product', product.update(db));
 
 // Category Endpoints
 app.get('/categories', category.list(db));
