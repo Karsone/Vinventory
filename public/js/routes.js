@@ -8,6 +8,10 @@ vinventory.config(['$routeProvider', function($routeProvider) {
       templateUrl: '/views/partials/listProducts.htm',
       controller: 'listProducts'
     }).
+    when('/modifyProducts', {
+      templateUrl: '/views/partials/modifyProducts.htm',
+      controller: 'modifyProducts'
+    }).
     otherwise({
       redirectTo: '/'
     });
