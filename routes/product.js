@@ -77,27 +77,29 @@ exports.list = function(db){
 		for (key in productData){
 			switch (key){
 				case "unit":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "isAlcoholic":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "count":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "displayOrder":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
 				case "abuseMessage":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					}
+				case "_id":
+					break;
 				default:
-					if(productData[key].length > 0){
+					if(productData[key]){
 						newProduct[key] = productData[key];
 					} else {
 						data.isSuccessful = 0;
@@ -140,27 +142,29 @@ exports.edit = function(db){
 		for (key in productData){
 			switch (key){
 				case "unit":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						updatedProduct[key] = productData[key];
 					}
 				case "isAlcoholic":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						updatedProduct[key] = productData[key];
 					}
 				case "count":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						updatedProduct[key] = productData[key];
 					}
 				case "displayOrder":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						updatedProduct[key] = productData[key];
 					}
 				case "abuseMessage":
-					if(productData[key].length > 0){
+					if(productData[key]){
 						updatedProduct[key] = productData[key];
 					}
+				case "_id":
+					break;
 				default:
-					if(productData[key].length > 0){
+					if(productData[key]){
 						updatedProduct[key] = productData[key];
 					} else {
 						data.isSuccessful = 0;
@@ -170,7 +174,7 @@ exports.edit = function(db){
 			}
 		}
 
-		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, function(err, item){
+		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, { 'safe': true }, function(err, item){
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;
