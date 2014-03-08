@@ -1,8 +1,8 @@
 vinventory.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: '/views/partials/listUsers.htm',
-      controller: 'listUsers'
+      templateUrl: '/views/partials/users.htm',
+      controller: 'users'
     }).
     when('/listProducts', {
       templateUrl: '/views/partials/listProducts.htm',
