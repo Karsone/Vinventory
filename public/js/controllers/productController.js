@@ -18,7 +18,7 @@ vinventory.controller("products", function($location, $scope, $rootScope, global
 });
 
 
-vinventory.controller("manageProducts", function($scope, $rootScope, globalData, globalFunctions, productService){
+vinventory.controller("manageProducts", function($scope, $rootScope, globalData, globalFunctions, productService, $location, $anchorScroll){
 
 	$scope.products = globalData.products;
 
@@ -28,18 +28,23 @@ vinventory.controller("manageProducts", function($scope, $rootScope, globalData,
 		$scope.productEditing = true;
 		$scope.productCreating = false;
 		$scope.productEditingForm = product;
+		$location.hash('top');
+		$anchorScroll();
 	}
 
 	$scope.toggleCreate = function(){
 		$scope.productCreating = true;
 		$scope.productEditing = false;
+
+		$location.hash('top');
+		$anchorScroll();
 	}
 	
 	
 	$scope.productEdit = function(formData){
-		console.log(formData);
 		productService.productEdit(formData, function(formData){
-			console.log(formData);
+			$scope.productEditing = false;
+			alert("Edited Product!")
 		});
 	}
 

@@ -20,6 +20,14 @@ a{
 
 
 .main{
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background:#2c2c2c;
+	overflow:scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 .manageList{
@@ -53,14 +61,7 @@ a{
 
 
 .list{
-	position: absolute;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
 	background:#2c2c2c;
-	overflow:scroll;
-	-webkit-overflow-scrolling: touch;
 	border:2px solid #2c2c2c;
 	article{
 		width:25%;
