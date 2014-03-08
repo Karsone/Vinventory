@@ -67,7 +67,7 @@ a{
 				-webkit-filter: grayscale(100%);
 			}
 		}
-		&:target{
+		&.active{
 			img{
 
 			}
@@ -93,15 +93,15 @@ a{
 //Product List
 .products{
 	display:none;
-	&:target{
-		display: block;
-		@extend .animated;
-		@extend .slideInDown;
-	}
-	&.closed{
-		@extend .animated;
-		@extend .slideOutUp;
-	}
+	// &.active{
+	// 	display: block;
+	// 	@extend .animated;
+	// 	@extend .slideInDown;
+	// }
+	// &.closed{
+	// 	@extend .animated;
+	// 	@extend .slideOutUp;
+	// }
 	.cancel{
 		width:48px;
 		height:48px;
@@ -121,3 +121,59 @@ a{
 
 
 //Product Profile List
+
+
+
+//Buttons
+
+.button{
+	line-height:52px;
+	border-radius:5px;
+	display:inline-block;
+	padding:0 20px;
+	font-size: 14px;
+	margin:0;
+	text-align:center;
+	vertical-align:middle;
+	cursor: pointer;
+	margin-bottom:5px;
+	border:0;
+}
+
+.button.generic{
+	color:#fff;
+	background:#8b8b8b;
+	&:focus, &:active{
+			background-color: darken(#8b8b8b, 20%)
+	}
+	&.disabled{
+		background-color: rgba(#8b8b8b, 0.4)
+	}
+}
+
+.button.blue{
+	color:#fff;
+	background:#307ebc;
+	&:focus, &:active{
+			background-color: darken(#307ebc, 20%)
+	}
+	&.disabled{
+		background-color: rgba(#307ebc, 0.4)
+	}
+}
+
+
+.button.green{
+	color:#fff;
+	background:#6eb848;
+	&:focus, &:active{
+			background-color: darken(#6eb848, 20%)
+	}
+	&.disabled{
+		background-color: rgba(#6eb848, 0.4)
+	}
+}
+
+.button.block{
+	display: block;
+}
