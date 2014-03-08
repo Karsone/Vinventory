@@ -8,7 +8,7 @@ exports.list = function(db){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
-			alertMessages: null,
+			alertMessages: [],
 			products : null
 		}
 		db.collection('products').find().toArray(function(err, items){
@@ -33,7 +33,7 @@ exports.list = function(db){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
-			alertMessages: null,
+			alertMessages: [],
 			product : null
 		}
 		
@@ -52,7 +52,7 @@ exports.list = function(db){
 };
 
 /*
- * GET create product
+ * POST new product
  */
  exports.create = function(db){
 	return function(req, res){
@@ -62,8 +62,47 @@ exports.list = function(db){
 			alertMessages: null,
 			product : null
 		}
+
+		var productData = req.body;
+		var newProduct = {
+			"categoryIDs": [],
+			"name": null,
+			"imageURL": null,
+			"unit": 1,
+			"abuseMessage": null,
+			"isAlcoholic": 0,
+		}
+
+		for (key in productData){
+			switch (key){
+				case "categoryIDs":
+					if(productData[key].length > 0){
+						newProduct[key] = productData[key];
+					}
+				case "unit":
+					if(productData[key].length > 0){
+						newProduct[key] = productData[key];
+					}
+				case "isAlcoholic":
+					if(productData[key].length > 0){
+						newProduct[key] = productData[key];
+					}
+				case "abuseMessage":
+					if(productData[key].length > 0){
+						newProduct[key] = productData[key];
+					}
+				default:
+					if(productData[key].length > 0){
+						newProduct[key] = productData[key];
+					} else {
+						data.isSuccessful = 0;
+						data.alertLevel = "dataError";
+						data.alertMessages.push(key + " is required");
+					}
+			}
+		}
 		
-		db.collection('products').insert(req.body, function(err, item){
+		db.collection('products').save(newProduct, {safe:true}, function(err, item){
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;
@@ -76,3 +115,68 @@ exports.list = function(db){
 		});
 	}
 };
+
+/*
+ * PUT update product
+ */
+ // exports.update = function(db){
+// 	return function(req, res){
+// 		var data = {
+// 			isSuccessful: 0,
+// 			alertLevel: null,
+// 			alertMessages: null,
+// 			product : null
+// 		}
+
+// 		var productData = req.body;
+// 		var newProduct = {
+// 			"categoryIDs": [],
+// 			"name": null,
+// 			"imageURL": null,
+// 			"unit": 1,
+// 			"abuseMessage": null,
+// 			"isAlcoholic": 0,
+// 		}
+
+// 		for (key in productData){
+// 			switch (key){
+// 				case "categoryIDs":
+// 					if(newProduct[key].length > 0){
+// 						newProduct[key] = productData[key];
+// 					}
+// 				case "unit":
+// 					if(newProduct[key].length > 0){
+// 						newProduct[key] = productData[key];
+// 					}
+// 				case "isAlcoholic":
+// 					if(newProduct[key].length > 0){
+// 						newProduct[key] = productData[key];
+// 					}
+// 				case "abuseMessage":
+// 					if(newProduct[key].length > 0){
+// 						newProduct[key] = productData[key];
+// 					}
+// 				default:
+// 					if(productData[key].length > 0){
+// 						newProduct[key] = productData[key];
+// 					} else {
+// 						data.isSuccessful = 0;
+// 						data.alertLevel = "dataError";
+// 						data.alertMessages.push(key + " is required");
+// 					}
+// 			}
+// 		}
+		
+// 		db.collection('products').save(newUser, {safe:true}, function(err, item){
+// 			if(err){
+// 				data.isSuccessful = 0;
+// 				data.alertLevel = err;
+// 				data.alertMessages = err;
+// 			}
+// 			data.isSuccessful = 1;
+// 			data.product = item;
+
+// 			res.json(data);
+// 		});
+// 	}
+// };
