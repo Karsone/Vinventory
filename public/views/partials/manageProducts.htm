@@ -1,0 +1,83 @@
+<div class="manageList">
+
+	<!-- Add Product -->
+	<button type="button" class="button generic block flat" ng-click="openView('/settings')">Back to Settings</button>
+	<button type="button" class="button blue block flat" ng-click="toggleCreate()" ng-hide="productCreating">Add Product</button>
+
+	<!-- Edit Product -->
+
+
+	<!-- EDIT PRODUCT FORM -->
+	<form ng-show="productEditing" name="productEditingForm" ng-submit="productEdit(productEditingForm)">
+		<div class="formGroup">
+			<label>Name</label>
+			<input type="text" ng-model="productEditingForm.name" ng-value="product.name" placeholder="Name">
+		</div>
+
+		<div class="formGroup">
+			<label>Avatar (Should be file upload)</label>
+			<input type="text" ng-model="productEditingForm.imageURL" ng-value="product.imageURL" placeholder="Avatar">	
+		</div>
+
+		<div class="formGroup">
+			<label><input type="checkbox" ng-model="productEditingForm.isAlcoholic"  ng-true-value="1" ng-false-value="0" ng-checked="product.isAlcoholic"> Is Alcoholic?</label>
+		</div>
+
+		<div class="formGroup">
+			<label>Abuse Message</label>
+			<input type="text" ng-model="productEditingForm.abuseMessage" ng-value="product.abuseMessage" placeholder="Abuse Message">
+		</div>
+
+		<div class="formGroup">
+			<label>Unit</label>
+			<input type="text" ng-model="productEditingForm.unit" ng-value="product.unit" placeholder="Unit">
+		</div>
+
+		<div class="formGroup">
+			<button type="submit" class="button blue buttonBlock" ng-click="productEdit(product)">Save</button>			
+			<button type="button" ng-click="productEditing = false" class="button generic buttonBlock">Cancel</button>	
+			<button type="button" ng-click="productDelete(product)" class="button generic" ng-hide="productEdit">Delete</button>
+		</div>
+	</form>
+	<!-- EDIT PRODUCT FORM -->
+
+	<!-- ADD PRODUCT FORM -->
+	<form ng-show="productCreating" name="productCreateForm" ng-submit="productCreate(productCreateForm)">
+		<div class="formGroup">
+			<label>Name</label>
+			<input type="text" ng-model="productCreateForm.name" placeholder="Name">
+		</div>
+
+		<div class="formGroup">
+			<label>Avatar (Should be file upload)</label>
+			<input type="text"  ng-model="productCreateForm.imageURL" placeholder="Avatar">	
+		</div>
+
+		<div class="formGroup">
+			<label><input type="checkbox" ng-model="productCreateForm.isAlcoholic"  ng-true-value="1" ng-false-value="0"> Is Alcoholic?</label>
+		</div>
+
+		<div class="formGroup">
+			<label>Abuse Message</label>
+			<input type="text" ng-model="productCreateForm.abuseMessage" placeholder="Abuse Message">
+		</div>
+
+		<div class="formGroup">
+			<label>Unit</label>
+			<input type="text" ng-model="productCreateForm.unit" placeholder="Unit">
+		</div>
+
+		<div class="formGroup">
+			<button type="submit" class="button blue buttonBlock">Save</button>			
+			<button type="button" ng-click="productCreating = false" class="button generic buttonBlock">Cancel</button>	
+		</div>
+	</form>
+	<!-- ADD PRODUCT FORM -->
+
+	<article ng-repeat="product in products">
+		<div class="pullLeft">{{product.name}}</div>
+		<div ng-click="toggleEditing(product)" class="button blue pullRight" ng-hide="productEdit">Edit Product</div>
+	</article>
+	<!-- Edit Product -->
+
+</div>

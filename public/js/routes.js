@@ -1,11 +1,11 @@
 vinventory.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: '/views/partials/users.htm',
+      templateUrl: 'users.htm',
       controller: 'users'
     }).
     when('/products', {
-      templateUrl: '/views/partials/products.htm',
+      templateUrl: 'products.htm',
       controller: 'products'
     }).
     when('/manageProducts', {
@@ -14,6 +14,9 @@ vinventory.config(['$routeProvider', function($routeProvider) {
     }).
     when('/settings', {
       templateUrl: '/views/partials/settings.htm'
+    }).
+    when('/test', {
+      templateUrl: 'template1.html'
     }).
     otherwise({
       redirectTo: '/'
