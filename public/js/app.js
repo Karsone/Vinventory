@@ -53,7 +53,18 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 				}
 			});
 
-		}
+		},
+		put: function(url, data, callback){
+
+			$http.put(url, data).success(function(response){
+				if (response.isSuccessful == 1) {
+					(callback)(response);
+				} else {
+					alert("ERROR");
+				}
+			});
+
+		},
 	}
 
 	return{

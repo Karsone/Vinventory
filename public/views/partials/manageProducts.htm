@@ -30,11 +30,21 @@
 
 		<div class="formGroup">
 			<label>Unit</label>
-			<input type="text" ng-model="productEditingForm.unit" ng-value="product.unit" placeholder="Unit">
+			<input type="number" ng-model="productEditingForm.unit" ng-value="product.unit" placeholder="Unit">
 		</div>
 
 		<div class="formGroup">
-			<button type="submit" class="button blue buttonBlock" ng-click="productEdit(product)">Save</button>			
+			<label>Inventory Count</label>
+			<input type="number" ng-model="productEditingForm.count" ng-value="product.count" placeholder="Count">
+		</div>
+
+		<div class="formGroup">
+			<label>Display Order</label>
+			<input type="number" ng-model="productEditingForm.displayOrder" ng-value="product.displayOrder" placeholder="Display Order">
+		</div>
+
+		<div class="formGroup">
+			<button type="submit" class="button blue buttonBlock">Save</button>			
 			<button type="button" ng-click="productEditing = false" class="button generic buttonBlock">Cancel</button>	
 			<button type="button" ng-click="productDelete(product)" class="button generic" ng-hide="productEdit">Delete</button>
 		</div>
@@ -68,6 +78,16 @@
 		</div>
 
 		<div class="formGroup">
+			<label>Inventory Count</label>
+			<input type="text" ng-model="productEditingForm.count" placeholder="Count">
+		</div>
+
+		<div class="formGroup">
+			<label>Display Order</label>
+			<input type="number" ng-model="productEditingForm.displayOrder" placeholder="Display Order">
+		</div>
+
+		<div class="formGroup">
 			<button type="submit" class="button blue buttonBlock">Save</button>			
 			<button type="button" ng-click="productCreating = false" class="button generic buttonBlock">Cancel</button>	
 		</div>
@@ -76,7 +96,7 @@
 
 	<article ng-repeat="product in products">
 		<div class="pullLeft">{{product.name}}</div>
-		<div ng-click="toggleEditing(product)" class="button blue pullRight" ng-hide="productEdit">Edit Product</div>
+		<div ng-click="toggleEditing(product)" class="button blue pullRight">Edit Product</div>
 	</article>
 	<!-- Edit Product -->
 

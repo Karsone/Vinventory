@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version 1.2 3-8-2014
+#version 1.3 3-8-2014
 
 CACHE:
 
@@ -60,7 +60,7 @@ CACHE:
 
 
 #style sheets
-/css/screen.css
+#/css/screen.css
 
 #style sheet images
 

@@ -20,7 +20,6 @@ vinventory.controller("products", function($location, $scope, $rootScope, global
 
 vinventory.controller("manageProducts", function($scope, $rootScope, globalData, globalFunctions, productService){
 
-
 	$scope.products = globalData.products;
 
 
@@ -37,6 +36,12 @@ vinventory.controller("manageProducts", function($scope, $rootScope, globalData,
 	}
 	
 	
+	$scope.productEdit = function(formData){
+		console.log(formData);
+		productService.productEdit(formData, function(formData){
+			console.log(formData);
+		});
+	}
 
 	$scope.productCreate = function(formData){
 		productService.productCreate(formData, function(){

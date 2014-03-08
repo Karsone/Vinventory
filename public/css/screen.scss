@@ -73,8 +73,8 @@ a{
 		border-top:2px solid #2c2c2c;
 		border-bottom:2px solid #2c2c2c;
 		position: relative;
-		// @extend .animated;
-		// @extend .fadeInLeft;
+		@extend .animated;
+		@extend .fadeInLeft;
 		span{
 			background: #a92119;
 			line-height: 170px;

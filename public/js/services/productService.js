@@ -14,15 +14,22 @@ vinventory.factory("productService", function($route, $routeParams, $resource, $
 		});
 	}
 
+	var productEdit = function(formData, callback){
+		globalFunctions.http.put("/product/"+formData._id+"", formData ,function(response){
+			// angular.copy(response.products, globalData.products);
+			console.log(response);
+			if(callback) (callback)(response);
+		});
+	}
+
 	var consumption = function(user, product, callback){
-		console.log(user);
-		console.log(product);
 		globalFunctions.http.post("/consumption", {userID:user._id, productID:product._id} ,function(response){
 			if(callback) (callback)(response);
 		});
 	}
 	return{
 		consumption: 		consumption,
+		productEdit:		productEdit,
 		productCreate:		productCreate,
 		products:			products
 	};
