@@ -11,7 +11,7 @@ var http = require('http');
 var path = require('path');
 
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/vinventory", { native_parser: true });
+var db = mongo.db("mongodb://vin65-vinventory.cloudapp.net:27017/vinventory", { native_parser: true });
 
 var app = express();
 
@@ -33,7 +33,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res) {
-	res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+	res.sendfile('./public/views/index.htm'); // load the single view file (angular will handle the page changes on the front-end)
 });
 app.get('/users', user.list);
 app.get('/categories', category.list(db));

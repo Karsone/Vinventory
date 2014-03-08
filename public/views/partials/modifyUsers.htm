@@ -1,0 +1,47 @@
+<div>
+
+	<!-- Edit User -->
+	<article ng-repeat="user in users">
+		<div>{{user.name}}</div>
+		<div ng-show="editingUser">
+			<form name="editUserForm" ng-submit="editUser(formData)">
+				<label>Name</label>
+				<input ng-model="formData.name" ng-value="user.name" placeholder="Name">
+
+				<label>Email</label>
+				<input ng-model="formData.email" ng-value="user.email" placeholder="Email">
+
+				<label>Avatar (Should be file upload)</label>
+				<input ng-model="formData.name" ng-value="user.avatar" placeholder="Avatar">	
+	
+				<button type="submit" class="button blue buttonBlock">Save</button>			
+				<button type="button" ng-click="editingUser = false" class="button blue buttonBlock">Cancel</div>	
+			</form>
+		</div>
+		<div ng-click="editUser(user)" class="button generic" ng-hide="editingUser">Edit User</div>
+		<div ng-click="deleteUser(user)" class="button generic" ng-hide="editingUser">Delete User</div>
+	</article>
+	<!-- Edit User -->
+
+
+	<!-- Add User -->
+	<div class="button blue" ng-click="addingUser = true" ng-hide="addingUser">Add User</div>
+
+	<article ng-show="addingUser">
+		<form name="addUserForm" ng-submit="addUser(formData)">
+			<label>Name</label>
+			<input ng-model="formData.name" ng-value="user.name" placeholder="Name">
+
+			<label>Email</label>
+			<input ng-model="formData.email" ng-value="user.email" placeholder="Email">
+
+			<label>Avatar (Should be file upload)</label>
+			<input ng-model="formData.name" ng-value="user.avatar" placeholder="Avatar">	
+
+			<button type="submit" class="button blue buttonBlock">Save</button>			
+			<button type="button" ng-click="addingUser = false" class="button blue buttonBlock">Cancel</div>	
+		</form>
+	</article>
+	<!-- Add User -->
+
+</div>
