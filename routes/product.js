@@ -102,7 +102,7 @@ exports.list = function(db){
 			}
 		}
 		
-		db.collection('products').save(newUser, {safe:true}, function(err, item){
+		db.collection('products').save(newProduct, {safe:true}, function(err, item){
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;
