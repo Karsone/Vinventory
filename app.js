@@ -42,7 +42,7 @@ app.get('/', function(req, res) {
 app.get('/products', product.list(db));
 app.get('/product/:id', product.load(db));
 app.post('/product', product.create(db));
-app.put('/product', product.update(db));
+// app.put('/product', product.update(db));
 
 // Category Endpoints
 app.get('/categories', category.list(db));
