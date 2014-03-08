@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var product = require('./routes/product');
 var category = require('./routes/category');
+var consumption = require('./routes/consumption');
 var http = require('http');
 var path = require('path');
 
@@ -50,6 +51,11 @@ app.get('/categories', category.list(db));
 app.get('/users/list', user.list(db));
 app.get('/user/:id/show', user.load(db));
 app.post('/user/create', user.create(db));
+
+// Consumption Endpoints
+app.get('/consumptions', consumption.list(db));
+app.get('/consumption/product/:id', consumption.loadByProduct(db));
+app.get('/consumption/user/:id', consumption.loadByUser(db));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
