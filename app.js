@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var product = require('./routes/product');
 var category = require('./routes/category');
 var http = require('http');
 var path = require('path');
@@ -36,6 +37,10 @@ app.get('/', function(req, res) {
 	res.sendfile('./public/views/index.htm'); // load the single view file (angular will handle the page changes on the front-end)
 });
 app.get('/users', user.list(db));
+// Product Endpoints
+app.get('/products', product.list(db));
+app.get('/product/:id', product.loadProduct(db));
+// Category Endpoints
 app.get('/categories', category.list(db));
 
 http.createServer(app).listen(app.get('port'), function(){
