@@ -167,3 +167,28 @@ exports.edit = function(db){
 		});
 	}
 }
+
+/*
+ * DELETE user by ID
+ */
+exports.delete = function(db){
+	return function(req, res){
+
+		var data = {
+			isSuccessful: 0,
+			alertLevel: null,
+			alertMessages: []
+		}
+
+		db.collection('users').remove({"_id": new ObjectID(req.params.id)}, function(err, item){
+			if(err){
+				data.isSuccessful = 0;
+				data.alertLevel = err;
+				data.alertMessages = err;
+			}
+			data.isSuccessful = 1;
+
+			res.json(data);
+		});
+	}
+}

@@ -53,6 +53,7 @@ app.get('/users', user.list(db));
 app.get('/user/:id', user.load(db));
 app.post('/user', user.create(db));
 app.put('/user/:id', user.edit(db));
+app.delete('/user/:id', user.delete(db));
 
 // Consumption Endpoints
 app.get('/consumptions', consumption.list(db));
