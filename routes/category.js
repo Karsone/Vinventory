@@ -11,7 +11,7 @@ exports.list = function(db){
 			alertMessages: null,
 			categories : null
 		}
-		db.collection("category").find().toArray(function(err, items) {
+		db.collection("categories").find().toArray(function(err, items) {
 			if(err) {
 				data.isSuccessful = 0;
 				data.alertLevel = err;
