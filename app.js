@@ -55,6 +55,7 @@ app.post('/user/create', user.create(db));
 app.get('/consumptions', consumption.list(db));
 app.get('/consumption/product/:id', consumption.loadByProduct(db));
 app.get('/consumption/user/:id', consumption.loadByUser(db));
+app.post('/consumption', consumption.create(db));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
