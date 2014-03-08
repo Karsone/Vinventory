@@ -1,0 +1,10 @@
+<div>
+	<!-- Show all Products, on click add inventory -->
+	<article ng-repeat="product in products">
+		<div>{{product.name}}</div>
+		<div>{{product.currentInventory}}</div>
+		<button type="button" class="button blue" ng-click="modifyInventyory(1)">+1</button>
+		<button type="button" class="button blue" ng-click="modifyInventyory(-1)">+1</button>
+	</article>
+	<!-- Show all Products, on click add inventory -->
+</div>

@@ -1,0 +1,45 @@
+<div>
+
+	<!-- Edit Product -->
+	<article ng-repeat="product in products">
+		<div>{{product.name}}</div>
+		<div ng-show="editingProduct">
+			<form name="editingProduct" ng-submit="editProduct(formData)">
+				<label>Name</label>
+				<input ng-model="formData.name" ng-value="product.name" placeholder="Name">
+
+				<label>Avatar (Should be file upload)</label>
+				<input ng-model="formData.name" ng-value="product.avatar" placeholder="Avatar">	
+	
+				<button type="submit" class="button blue buttonBlock">Save</button>			
+				<button type="button" ng-click="editingProduct = false" class="button blue buttonBlock">Cancel</div>	
+			</form>
+		</div>
+
+		<div ng-click="editProduct(product)" class="button generic" ng-hide="editProduct">Edit Product</div>
+		<div ng-click="deleteProduct(product)" class="button generic" ng-hide="editProduct">Delete Prodict</div>
+	</article>
+	<!-- Edit Product -->
+
+
+	<!-- Add Product -->
+	<div class="button blue" ng-click="addingProduct = true" ng-hide="addingProduct">Add Product</div>
+
+	<article ng-show="addingProduct">
+		<form name="addProductForm" ng-submit="addProduct(formData)">
+			<label>Name</label>
+			<input ng-model="formData.name" ng-value="product.name" placeholder="Name">
+
+			<label>Email</label>
+			<input ng-model="formData.email" ng-value="product.email" placeholder="Email">
+
+			<label>Avatar (Should be file upload)</label>
+			<input ng-model="formData.name" ng-value="product.avatar" placeholder="Avatar">	
+
+			<button type="submit" class="button blue buttonBlock">Save</button>			
+			<button type="button" ng-click="addingProduct = false" class="button blue buttonBlock">Cancel</div>	
+		</form>
+	</article>
+	<!-- Add Product -->
+
+</div>

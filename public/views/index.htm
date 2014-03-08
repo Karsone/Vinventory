@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html ng-app="vinventory">
+
+<head>
+	<title>Vinventory</title>
+	<meta name="viewport" content="user-scalable=no, width=device-height, height=device-width, initial-scale=1.0, maximum-scale=1.0 target-densityDpi=device-dpi"/>
+	<link rel="stylesheet" type="text/css" href="../css/screen.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+	<script src="../js/lib/angular.min.js"></script>
+	<script src="../js/lib/angular-route.min.js"></script>
+	<script src="../js/lib/angular-touch.min.js"></script>
+
+	<!-- App Items -->
+	<script src="../js/app.js"></script>
+	<script src="../js/routes.js"></script>
+	<!-- App Items -->
+
+	<!-- Controllers -->
+	<script src="../js/controllers/globalController.js"></script>
+	<script src="../js/controllers/productController.js"></script>
+	<script src="../js/controllers/userController.js"></script>
+	<!-- Controllers -->
+
+	<!-- Services -->
+	<script src="../js/services/globalService.js"></script>
+	<script src="../js/services/productService.js"></script>
+	<script src="../js/services/userService.js"></script>
+	<!-- Services -->
+
+
+</head>
+<body>
+
+<div ng-controller="globalController">
+	<ng-view></ng-view>
+</div>
+
+</body>
+</html>
