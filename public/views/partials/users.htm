@@ -4,7 +4,7 @@
 		<img src="{{user.imageURL}}">
 	</article>
 
-	<article ng-click="settings()">
+	<article ng-show="users.length" ng-click="openView('/settings')">
 		<span>Settings</span>
 	</article>
 </div>

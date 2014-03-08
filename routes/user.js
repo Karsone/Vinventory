@@ -1,5 +1,5 @@
-
 var ObjectID = require('mongodb').ObjectID
+
 /*
  * GET users listing
  */
@@ -19,7 +19,6 @@ exports.list = function(db){
 			}
 			data.isSuccessful = 1;
 			data.users = items;
-
 			res.json(data);
 		});
 	}
@@ -45,7 +44,6 @@ exports.load = function(db){
 			}
 			data.isSuccessful = 1;
 			data.user = item;
-
 			res.json(data);
 		});
 	}
@@ -107,7 +105,6 @@ exports.create = function(db){
 			}
 			data.isSuccessful = 1;
 			data.user = item;
-
 			res.json(data);
 		});
 	}
@@ -154,7 +151,8 @@ exports.edit = function(db){
 			}
 		}
 
-		db.collection('users').update({"_id": new ObjectID(req.params.id)}, { $set: updatedUser }, function(err, item){
+		db.collection('users').update({"_id": new ObjectID(req.params.id)}, { $set: updatedUser }, {safe:true}, function(err, item){
+			console.log(exports.list(db));
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;
@@ -162,7 +160,6 @@ exports.edit = function(db){
 			}
 			data.isSuccessful = 1;
 			data.user = item;
-
 			res.json(data);
 		});
 	}
@@ -177,17 +174,18 @@ exports.delete = function(db){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
-			alertMessages: []
+			alertMessages: [],
+			users: []
 		}
 
-		db.collection('users').remove({"_id": new ObjectID(req.params.id)}, function(err, item){
+		db.collection('users').remove({"_id": new ObjectID(req.params.id)}, true, function(err, item){
 			if(err){
 				data.isSuccessful = 0;
 				data.alertLevel = err;
 				data.alertMessages = err;
 			}
 			data.isSuccessful = 1;
-
+			data.users = exports.list(db);
 			res.json(data);
 		});
 	}

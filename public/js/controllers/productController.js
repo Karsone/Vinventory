@@ -18,7 +18,7 @@ vinventory.controller("products", function($location, $scope, $rootScope, global
 });
 
 
-vinventory.controller("modifyProducts", function($scope, $rootScope, globalData, globalFunctions, productService){
+vinventory.controller("manageProducts", function($scope, $rootScope, globalData, globalFunctions, productService){
 
 
 	$scope.products = globalData.products;
