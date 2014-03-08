@@ -76,19 +76,19 @@ exports.list = function(db){
 		for (key in productData){
 			switch (key){
 				case "categoryIDs":
-					if(newProduct[key].length > 0){
+					if(productData[key].length > 0){
 						newProduct[key] = productData[key];
 					}
 				case "unit":
-					if(newProduct[key].length > 0){
+					if(productData[key].length > 0){
 						newProduct[key] = productData[key];
 					}
 				case "isAlcoholic":
-					if(newProduct[key].length > 0){
+					if(productData[key].length > 0){
 						newProduct[key] = productData[key];
 					}
 				case "abuseMessage":
-					if(newProduct[key].length > 0){
+					if(productData[key].length > 0){
 						newProduct[key] = productData[key];
 					}
 				default:
@@ -119,7 +119,7 @@ exports.list = function(db){
 /*
  * PUT update product
  */
- exports.update = function(db){
+ // exports.update = function(db){
 // 	return function(req, res){
 // 		var data = {
 // 			isSuccessful: 0,
