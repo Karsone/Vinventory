@@ -1,9 +1,18 @@
-<div>
-	<div class="settings">
-		<ul>
-			<li ng-click="openView('manageUsers')">Manage Users</li>
-			<li ng-click="openView('manageProducts')">Manage Products</li>
-			<li ng-click="openView('manageInventory')">Manage Inventory</li>
-		</ul>
-	</div>
+<div class="manageList">
+	<button type="button" class="button generic block flat" ng-click="openView('/')">Back to Main Screen</button>
+
+	<article ng-click="openView('/manageUsers')">
+		<div class="pullLeft">Manage Users</div>
+		<div class="button blue pullRight" ng-hide="productEdit">Manage Users</div>
+	</article>
+	<article ng-click="openView('/manageProducts')">
+		<div class="pullLeft">Manage Products</div>
+		<div class="button blue pullRight" ng-hide="productEdit">Manage Products</div>
+	</article>
+	<article>
+		<a href="/">
+			<div class="pullLeft">Reload System</div>
+			<div class="button blue pullRight" ng-hide="productEdit">Reload System</div>
+		</a>
+	</article>
 </div>
