@@ -39,7 +39,8 @@ app.get('/', function(req, res) {
 
 // Product Endpoints
 app.get('/products', product.list(db));
-app.get('/product/:id', product.loadProduct(db));
+app.get('/product/:id', product.load(db));
+app.get('/product/create', product.create(db));
 
 // Category Endpoints
 app.get('/categories', category.list(db));
