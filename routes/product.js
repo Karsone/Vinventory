@@ -69,6 +69,7 @@ exports.list = function(db){
 			"imageURL": null,
 			"unit": 1,
 			"count": 0,
+			"displayOrder": 1,
 			"abuseMessage": null,
 			"isAlcoholic": 0,
 		}
@@ -84,6 +85,10 @@ exports.list = function(db){
 						newProduct[key] = productData[key];
 					}
 				case "count":
+					if(productData[key].length > 0){
+						newProduct[key] = productData[key];
+					}
+				case "displayOrder":
 					if(productData[key].length > 0){
 						newProduct[key] = productData[key];
 					}
@@ -143,6 +148,10 @@ exports.edit = function(db){
 						updatedProduct[key] = productData[key];
 					}
 				case "count":
+					if(productData[key].length > 0){
+						updatedProduct[key] = productData[key];
+					}
+				case "displayOrder":
 					if(productData[key].length > 0){
 						updatedProduct[key] = productData[key];
 					}

@@ -90,6 +90,9 @@ exports.list = function(db){
 			data.consumption = item;
 		});
 
+		// Check if product has count of 0
+		// var product = db.collection('products').find({ "_id": new ObjectID(req.body.productID)});
+
 		db.collection('products').update({ "_id": new ObjectID(req.body.productID)},{ $inc : { count: -1 } }, function(err, item){
 			if(err){
 				data.isSuccessful = 0;
