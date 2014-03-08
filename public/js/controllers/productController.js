@@ -23,7 +23,6 @@ vinventory.controller("manageProducts", function($scope, $rootScope, globalData,
 	$scope.products = globalData.products;
 
 
-
 	$scope.toggleEditing = function(product){
 		$scope.productEditing = true;
 		$scope.productCreating = false;
