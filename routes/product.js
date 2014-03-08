@@ -65,7 +65,6 @@ exports.list = function(db){
 
 		var productData = req.body;
 		var newProduct = {
-			"categoryIDs": [],
 			"name": null,
 			"imageURL": null,
 			"unit": 1,
@@ -76,10 +75,6 @@ exports.list = function(db){
 
 		for (key in productData){
 			switch (key){
-				case "categoryIDs":
-					if(productData[key].length > 0){
-						newProduct[key] = productData[key];
-					}
 				case "unit":
 					if(productData[key].length > 0){
 						newProduct[key] = productData[key];
@@ -139,10 +134,6 @@ exports.edit = function(db){
 
 		for (key in productData){
 			switch (key){
-				case "categoryIDs":
-					if(productData[key].length > 0){
-						updatedProduct[key] = productData[key];
-					}
 				case "unit":
 					if(productData[key].length > 0){
 						updatedProduct[key] = productData[key];
