@@ -124,29 +124,17 @@ a{
 
 
 //Product List
-.products{
-	display:none;
-	// &.active{
-	// 	display: block;
-	// 	@extend .animated;
-	// 	@extend .slideInDown;
-	// }
-	// &.closed{
-	// 	@extend .animated;
-	// 	@extend .slideOutUp;
-	// }
-	.cancel{
-		width:48px;
-		height:48px;
-		line-height: 48px;
-		font-size:42px;
-		text-align:center;
-		color:#fff;
-		background: #686868;
-		position: absolute;
-		bottom:0;
-		left:0;
-	}
+.cancel{
+	width:42px;
+	height:42px;
+	line-height: 42px;
+	font-size:40px;
+	text-align:center;
+	color:#fff;
+	background: #686868;
+	position: absolute;
+	top:0;
+	right:0;
 }
 
 
