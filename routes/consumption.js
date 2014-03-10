@@ -80,6 +80,7 @@ exports.list = function(db){
 			consumption : null
 		}
 
+
 		db.collection('products').find({ "_id": new ObjectID(req.body.productID)}).toArray(function(err, product) { 
 			if(product[0].count > 0) {
 				db.collection('products').update({ "_id": new ObjectID(req.body.productID)},{ $inc : { count: -1 } }, function(err, item){
@@ -90,6 +91,7 @@ exports.list = function(db){
 					}
 					data.isSuccessful = 1;
 					data.product = item;
+					res.json(data);
 				});
 			} else {
 				data.isSuccessful = 0;

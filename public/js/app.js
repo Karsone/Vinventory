@@ -20,7 +20,7 @@ vinventory.factory("globalData", function(){
 });
 
 //Global Functions
-vinventory.factory("globalFunctions", function($http, $rootScope, $location, globalData){
+vinventory.factory("globalFunctions", function($http, $rootScope, $location, globalData, $location){
 
 	// var function = function(){
 	// }
@@ -36,11 +36,12 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 					if (response.isSuccessful == 1) {
 						(callback)(response);
 					} else {
-						alert("ERROR");
+						alert(response.alertMessage);
 					}
 				}, function(response){
 					//Error
 					alert("BIG ERROR");
+					$location.reload();
 				})
 		},
 		post: function(url, data, callback){
@@ -49,7 +50,7 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 				if (response.isSuccessful == 1) {
 					(callback)(response);
 				} else {
-					alert("ERROR");
+					alert(response.alertMessage);
 				}
 			});
 
@@ -60,7 +61,7 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 				if (response.isSuccessful == 1) {
 					(callback)(response);
 				} else {
-					alert("ERROR");
+					alert(response.alertMessage);
 				}
 			});
 

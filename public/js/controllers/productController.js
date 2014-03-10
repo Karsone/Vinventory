@@ -1,4 +1,4 @@
-vinventory.controller("products", function($location, $scope, $rootScope, globalData, globalFunctions, productService){
+vinventory.controller("products", function($location, $scope, $rootScope, globalData, globalFunctions, productService, $location, $anchorScroll){
 
 	$scope.products = globalData.products;
 
@@ -7,6 +7,8 @@ vinventory.controller("products", function($location, $scope, $rootScope, global
 		productService.consumption($rootScope.selectedUser, $rootScope.selectedProduct, function(response){
 			$rootScope.selectedProduct = null;
 			$rootScope.selectedUser = null;
+			$location.hash('top');
+			$anchorScroll();
 			$location.path("/");
 		});
 	}
