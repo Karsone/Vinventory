@@ -14,7 +14,11 @@ var http = require('http');
 var path = require('path');
 
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://vin65-vinventory.cloudapp.net:27017/vinventory", { native_parser: true });
+var db = mongo.db("mongodb://vin65-vinventory.cloudapp.net:27017/vinventory", { native_parser: true, auto_reconnect: true });
+
+db.on('disconnected', function() {
+	console.log('MongoDB disconnected!');
+});
 
 var app = express();
 
