@@ -10,8 +10,8 @@ exports.list = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
-			alertLevel: null,
-			alertMessages: null,
+			alertLevel: '',
+			alertMessages: '',
 			consumptions : null
 		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
@@ -38,8 +38,8 @@ exports.list = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
-			alertLevel: null,
-			alertMessages: null,
+			alertLevel: '',
+			alertMessages: '',
 			consumption : null
 		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
@@ -66,8 +66,8 @@ exports.list = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
-			alertLevel: null,
-			alertMessages: null,
+			alertLevel: '',
+			alertMessages: '',
 			consumptions : null
 		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
@@ -94,8 +94,8 @@ exports.list = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
-			alertLevel: null,
-			alertMessages: null,
+			alertLevel: '',
+			alertMessages: '',
 			consumption : null
 		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
@@ -111,6 +111,17 @@ exports.list = function(){
 		  			}
 		  			data.isSuccessful = 1;
 		  			data.product = item;
+		  			
+  			  		db.collection('consumptions').insert(req.body, function(err, item){
+  						if(err){
+  							data.isSuccessful = 0;
+  							data.alertLevel = err;
+  							data.alertMessages = err;
+  						}
+  						data.isSuccessful = 1;
+  						data.consumption = item;
+  					});
+
 		  			res.json(data);
 		  		});
 		  	} else {
@@ -120,28 +131,8 @@ exports.list = function(){
 		  		res.json(data);
 		  	}
 
-		  	// data.isSuccessful = 1;
-		  	// data.consumptions = items;
-
-		   //  mongoclient.close();
-
-		   //  res.json(data); 
+		    mongoclient.close();
 		  });
 		});
-
-		// mongoclient.open(function(err, mongoclient) {
-		var db = mongoclient.db("vinventory");
-		db.collection('consumptions').insert(req.body, function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.consumption = item;
-
-			mongoclient.close();
-		});
-		// });
 	}
 };

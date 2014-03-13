@@ -45,7 +45,6 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 				})
 		},
 		post: function(url, data, callback){
-
 			$http.post(url, data).success(function(response){
 				if (response.isSuccessful == 1) {
 					(callback)(response);
