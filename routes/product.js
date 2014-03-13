@@ -1,26 +1,34 @@
-var ObjectID = require('mongodb').ObjectID
+var ObjectID = require('mongodb').ObjectID,
+	MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server;
 
 /*
  * GET products listing
  */
-exports.list = function(db){
+exports.list = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: [],
 			products : null
-		}
-		db.collection('products').find({}, { 'sort': 'displayOrder' }).toArray(function(err, items){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.products = items;
+		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
-			res.json(data);
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('products').find({}, { 'sort': 'displayOrder' }).toArray(function(err, items) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.products = items;
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 };
@@ -28,25 +36,30 @@ exports.list = function(db){
 /*
  * GET product by ID
  */
- exports.load = function(db){
+ exports.load = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: [],
 			product : null
-		}
+		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 		
-		db.collection('products').find({"_id": new ObjectID(req.params.id)}).toArray(function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.product = item;
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('products').find({"_id": new ObjectID(req.params.id)}).toArray(function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.product = item;
 
-			res.json(data);
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 };
@@ -54,17 +67,17 @@ exports.list = function(db){
 /*
  * POST new product
  */
- exports.create = function(db){
+ exports.create = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: [],
 			product : null
-		}
-
-		var productData = req.body;
-		var newProduct = {
+		}, 
+		mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true}),
+		productData = req.body,
+		newProduct = {
 			"name": null,
 			"imageURL": null,
 			"unit": 1,
@@ -108,17 +121,22 @@ exports.list = function(db){
 					}
 			}
 		}
-		
-		db.collection('products').save(newProduct, {safe:true}, function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.product = item;
 
-			res.json(data);
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('products').save(newProduct, {safe:true}, function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.product = item;
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 };
@@ -134,10 +152,10 @@ exports.edit = function(db){
 			alertLevel: null,
 			alertMessages: [],
 			product : null
-		}
-
-		var productData = req.body;
-		var updatedProduct = {};
+		}, 
+		mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true}),
+		productData = req.body,
+		updatedProduct = {};
 
 		for (key in productData){
 			switch (key){
@@ -174,17 +192,22 @@ exports.edit = function(db){
 			}
 		}
 
-		db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, { 'safe': true }, function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('products').update({"_id": new ObjectID(req.params.id)}, { $set: updatedProduct }, { 'safe': true }, function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
 			data.product = item;
 			data.products = exports.list(db);
 
-			res.json(data);
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 }

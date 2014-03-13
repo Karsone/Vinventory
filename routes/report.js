@@ -1,49 +1,35 @@
-var ObjectID = require('mongodb').ObjectID
+var ObjectID = require('mongodb').ObjectID,
+	MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server;
 /*
  * GET User Report
  */
 
-exports.userReport = function(db){
+exports.userReport = function() {
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: null,
-			report : null
-		}
+			consumptions : null
+		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
-		db.collection('products').find({ "_id": new ObjectID(req.body.productID)}).toArray(function(err, product) { 
-			if(product[0].count > 0) {
-				db.collection('products').update({ "_id": new ObjectID(req.body.productID)},{ $inc : { count: -1 } }, function(err, item){
-					if(err){
-						data.isSuccessful = 0;
-						data.alertLevel = err;
-						data.alertMessages = err;
-					}
-					data.isSuccessful = 1;
-					data.product = item;
-					// data.products = exports.list(db);
-					// res.json(data);
-				});
-			} else {
-				data.isSuccessful = 0;
-				data.alertLevel = "Error";
-				data.alertMessage = "Product out of inventory";
-				res.json(data);
-			}
-    })  
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('consumptions').find({ "userID": req.params.id}).toArray(function(err, items) { 
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.consumptions = items;
 
-		db.collection('consumptions').find({"userID": req.params.id}).toArray(function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.consumption = item;
-			// res.json(data);
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
-		
 	}
 };
 

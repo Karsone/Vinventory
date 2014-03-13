@@ -10,7 +10,6 @@ var product = require('./routes/product');
 var category = require('./routes/category');
 var consumption = require('./routes/consumption');
 var report = require('./routes/report');
-var test = require('./routes/test');
 var http = require('http');
 var path = require('path');
 
@@ -51,33 +50,30 @@ app.get('/', function(req, res) {
 });
 
 // Product Endpoints
-app.get('/products', product.list(db));
-app.get('/product/:id', product.load(db));
-app.post('/product', product.create(db));
-app.put('/product/:id', product.edit(db));
-// app.delete('/product/:id', product.delete(db));
+app.get('/products', product.list());
+app.get('/product/:id', product.load());
+app.post('/product', product.create());
+app.put('/product/:id', product.edit());
+// app.delete('/product/:id', product.delete());
 
 // Category Endpoints
-app.get('/categories', category.list(db));
+app.get('/categories', category.list());
 
 // User Endpoints
-app.get('/users', user.list(db));
-app.get('/user/:id', user.load(db));
-app.post('/user', user.create(db));
-app.put('/user/:id', user.edit(db));
-app.delete('/user/:id', user.delete(db));
+app.get('/users', user.list());
+app.get('/user/:id', user.load());
+app.post('/user', user.create());
+app.put('/user/:id', user.edit());
+app.delete('/user/:id', user.delete());
 
 // Consumption Endpoints
-app.get('/consumptions', consumption.list(db));
-app.get('/consumption/product/:id', consumption.loadByProduct(db));
-app.get('/consumption/user/:id', consumption.loadByUser(db));
-app.post('/consumption', consumption.create(db));
+app.get('/consumptions', consumption.list());
+app.get('/consumption/product/:id', consumption.loadByProduct());
+app.get('/consumption/user/:id', consumption.loadByUser());
+app.post('/consumption', consumption.create());
 
 // Reporting Endpoints
-app.get('/userReport/user/:id', report.userReport(db));
-
-// Testing Endpoints
-app.get('/testing', test.testDatabase());
+app.get('/userReport/user/:id', report.userReport());
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

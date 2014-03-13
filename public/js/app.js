@@ -36,7 +36,7 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 					if (response.isSuccessful == 1) {
 						(callback)(response);
 					} else {
-						alert(response.alertMessage);
+						alert(response.alertMessages);
 					}
 				}, function(response){
 					//Error
@@ -50,7 +50,7 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 				if (response.isSuccessful == 1) {
 					(callback)(response);
 				} else {
-					alert(response.alertMessage);
+					alert(response.alertMessages);
 				}
 			});
 
@@ -61,7 +61,7 @@ vinventory.factory("globalFunctions", function($http, $rootScope, $location, glo
 				if (response.isSuccessful == 1) {
 					(callback)(response);
 				} else {
-					alert(response.alertMessage);
+					alert(response.alertMessages);
 				}
 			});
 

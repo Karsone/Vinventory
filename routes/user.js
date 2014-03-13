@@ -1,25 +1,33 @@
-var ObjectID = require('mongodb').ObjectID
-
+var ObjectID = require('mongodb').ObjectID,
+	MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server;
 /*
  * GET users listing
  */
-exports.list = function(db){
+exports.list = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: [],
 			users : null
-		}
-		db.collection('users').find().toArray(function(err, items){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.users = items;
-			res.json(data);
+		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
+
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('users').find().toArray(function(err, items) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.users = items;
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 };
@@ -27,24 +35,30 @@ exports.list = function(db){
 /*
  * GET user by ID.
  */
-exports.load = function(db){
+exports.load = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: [],
 			user : null
-		}
+		}, mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true});
 
-		db.collection('users').find({"_id": new ObjectID(req.params.id)}).toArray(function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.user = item;
-			res.json(data);
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('users').find({"_id": new ObjectID(req.params.id)}).toArray(function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.user = item;
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 };
@@ -52,17 +66,17 @@ exports.load = function(db){
 /*
  * POST new user
  */
-exports.create = function(db){
+exports.create = function(){
 	return function(req, res){
 		var data = {
 			isSuccessful: 0,
 			alertLevel: null,
 			alertMessages: [],
 			user : null
-		}
-
-		var userData = req.body
-		var newUser = {
+		}, 
+		mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true}),
+		userData = req.body,
+		newUser = {
 			"name": null,
 			"email": null,
 			"imageURL": null,
@@ -99,15 +113,21 @@ exports.create = function(db){
 			}
 		}
 
-		db.collection('users').save(newUser, {safe:true}, function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.user = item;
-			res.json(data);
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('users').save(newUser, {safe:true}, function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.user = item;
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 };
@@ -115,7 +135,7 @@ exports.create = function(db){
 /*
  * PUT updated user data
  */
-exports.edit = function(db){
+exports.edit = function(){
 	return function(req, res){
 
 		var data = {
@@ -123,10 +143,10 @@ exports.edit = function(db){
 			alertLevel: null,
 			alertMessages: [],
 			user : null
-		}
-
-		var userData = req.body;
-		var updatedUser = {};
+		},
+		mongoclient = new MongoClient(new Server("vin65-vinventory.cloudapp.net", 27017), {native_parser: true}),
+		userData = req.body,
+		updatedUser = {};
 
 		for (key in userData){
 			switch (key){
@@ -155,16 +175,21 @@ exports.edit = function(db){
 			}
 		}
 
-		db.collection('users').update({"_id": new ObjectID(req.params.id)}, { $set: updatedUser }, {safe:true}, function(err, item){
-			console.log(exports.list(db));
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.user = item;
-			res.json(data);
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('users').update({"_id": new ObjectID(req.params.id)}, { $set: updatedUser }, {safe:true}, function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.user = item;
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 }
@@ -172,7 +197,7 @@ exports.edit = function(db){
 /*
  * DELETE user by ID
  */
-exports.delete = function(db){
+exports.delete = function(){
 	return function(req, res){
 
 		var data = {
@@ -182,15 +207,21 @@ exports.delete = function(db){
 			users: []
 		}
 
-		db.collection('users').remove({"_id": new ObjectID(req.params.id)}, true, function(err, item){
-			if(err){
-				data.isSuccessful = 0;
-				data.alertLevel = err;
-				data.alertMessages = err;
-			}
-			data.isSuccessful = 1;
-			data.users = exports.list(db);
-			res.json(data);
+		mongoclient.open(function(err, mongoclient) {
+		  var db = mongoclient.db("vinventory");
+		  db.collection('users').remove({"_id": new ObjectID(req.params.id)}, true, function(err, item) {
+		  	if(err){
+		  		data.isSuccessful = 0;
+		  		data.alertLevel = err;
+		  		data.alertMessages = err;
+		  	}
+		  	data.isSuccessful = 1;
+		  	data.users = exports.list(db);
+
+		    mongoclient.close();
+
+		    res.json(data); 
+		  });
 		});
 	}
 }
