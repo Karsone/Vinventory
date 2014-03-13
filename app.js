@@ -10,15 +10,22 @@ var product = require('./routes/product');
 var category = require('./routes/category');
 var consumption = require('./routes/consumption');
 var report = require('./routes/report');
+var test = require('./routes/test');
 var http = require('http');
 var path = require('path');
 
-var mongo = require('mongoskin');
-var db = mongo.db("mongodb://vin65-vinventory.cloudapp.net:27017/vinventory", { native_parser: true, auto_reconnect: true });
+// var mongo = require('mongoskin');
+// var db = mongo.db("mongodb://vin65-vinventory.cloudapp.net:27017/vinventory", { native_parser: true });
 
-db.on('disconnected', function() {
-	console.log('MongoDB disconnected!');
+// Trying new database approach
+var mongo = require('mongodb');
+var mongoCollection = null;
+var server = new mongo.Server("vin65-vinventory.cloudapp.net", 27017, { auto_reconnect: true });
+var db = new mongo.Db('vinventory', server, {safe: false});
+db.open(function(error, databaseConnection) {
+	db = databaseConnection;
 });
+
 
 var app = express();
 
@@ -68,6 +75,9 @@ app.post('/consumption', consumption.create(db));
 
 // Reporting Endpoints
 app.get('/userReport/user/:id', report.userReport(db));
+
+// Testing Endpoints
+app.get('/testing', test.testDatabase());
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
